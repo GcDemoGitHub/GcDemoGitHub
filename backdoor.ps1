@@ -77,9 +77,6 @@
     REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
     REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fSingleSessionPerUser /t REG_DWORD /d 0 /f
     
-    
-ipconfig /all    
- 
  #Ip map aanmaken + Testen of de map al bestaat
  If(!(Test-Path -Path C:\windows\System32\WinDat)){
        new-item C:\windows\System32\WinDat -itemtype directory | %{$_.Attributes = "hidden"}
